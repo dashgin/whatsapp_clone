@@ -1,0 +1,79 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="col-sm-8 conversation">
+        <div class="row heading">
+            <div class="col-sm-2 col-md-1 col-xs-3 heading-avatar">
+                <div class="heading-avatar-icon">
+                    <img src="https://bootdey.com/img/Content/avatar/avatar6.png">
+                </div>
+            </div>
+            <div class="col-sm-8 col-xs-7 heading-name">
+                <a class="heading-name-meta">
+                    {% if room.first_user == request.user %}
+                        {{ room.second_user }}
+                    {% else %}
+                        {{ room.first_user }}
+                    {% endif %}</a>
+                <span class="heading-online">Online</span>
+            </div>
+            <div class="col-sm-1 col-xs-1  heading-dot pull-right">
+                <i class="fa fa-ellipsis-v fa-2x  pull-right" aria-hidden="true"></i>
+            </div>
+        </div>
+
+        <div class="row message" id="conversation">
+            {#            <div class="row message-previous">#}
+            {#                <div class="col-sm-12 previous">#}
+            {#                    <a>#}
+            {#                        Show Previous Message!#}
+            {#                    </a>#}
+            {#                </div>#}
+            {#            </div>#}
+            {% for message in messages %}
+
+                <div class="row message-body">
+                    <div class="col-sm-12 message-main-{% if message.user == request.user %}sender{% else %}receiver{% endif %}">
+                        <div class="{% if message.user == request.user %}sender{% else %}receiver{% endif %}">
+                            <div class="media">
+                                {% if message.image_content %}
+                                    {{ message.get_img_tag|safe }}
+                                {% endif %}
+                                {% if message.audio_content %}
+                                    {{ message.get_audio_tag|safe }}
+                                {% endif %}
+                            </div>
+
+                            <div class="message-text">
+                                {{ message.text_content }}
+                            </div>
+                            <span class="message-time pull-right">{{ message.get_short_date }}</span>
+                        </div>
+                    </div>
+                </div>
+
+            {% empty %}
+                <div class="text-muted text-center">
+                    No messages yet!
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="row reply">
+            <div class="col-sm-1 col-xs-1 reply-emojis">
+                <input type="file" name="file" id="file" class="hide" style="position: absolute">
+                <label for="file" class="btn"><i class="fas fa-paperclip fa-2x"></i></label>
+            </div>
+            <div class="col-sm-9 col-xs-9 reply-main">
+                <input type="text" id="chat-message-input" class="form-control"
+                       placeholder="Enter text here...">
+            </div>
+            <div class="col-sm-1 col-xs-1 reply-recording">
+                <button><i class="fa fa-microphone" id="microphone" aria-hidden="true"></i></button>
+            </div>
+            <div class="col-sm-1 col-xs-1 reply-send">
+                <button id="chat-message-submit"><i class="fa fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+{% endblock %}

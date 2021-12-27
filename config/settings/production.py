@@ -19,8 +19,8 @@ MIDDLEWARE += ['whitenoise.middleware.WhiteNoiseMiddleware']
 # CSRF_COOKIE_SECURE = True
 # SECURE_BROWSER_XSS_FILTER = True
 
-STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = [BASE_DIR / "static"]
+STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 django_heroku.settings(locals())

@@ -8,7 +8,7 @@ from .models import Room
 User = get_user_model()
 
 
-class Index(View):
+class Index(LoginRequiredMixin, View):
     def get(self, request):
         users = User.objects.exclude(id=self.request.user.id)
         context = {

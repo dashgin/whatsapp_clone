@@ -11,7 +11,7 @@ ALLOWED_HOSTS = ['.herokuapp.com', 'localhost']
 
 DATABASES['default'] = dj_database_url.config(conn_max_age=300, ssl_require=True)
 
-MIDDLEWARE += ['whitenoise.middleware.WhiteNoiseMiddleware']
+MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
 
 # Security
 # SECURE_SSL_REDIRECT = True

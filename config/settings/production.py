@@ -6,8 +6,11 @@ from .base import BASE_DIR, DATABASES
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
-DEBUG = False
-ALLOWED_HOSTS = ['.herokuapp.com', 'localhost']
+DEBUG = int(os.environ.get("DEBUG", default=0))
+# 'DJANGO_ALLOWED_HOSTS' should be a single string of hosts with ',' between each.
+# For example: 'DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,[::1]'
+ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", default="127.0.0.1,0.0.0.0,localhost").split(",")
+CSRF_TRUSTED_ORIGINS = os.environ.get("CSRF_TRUSTED_ORIGINS", default="*").split(",")
 
 DATABASES['default'] = dj_database_url.config(conn_max_age=300, ssl_require=True)
 

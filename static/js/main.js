@@ -24,7 +24,7 @@ function messageBox(data) {
 
     let image = emptyChecker(data.image) ? `<img src="${data.image}" width="150" height="150">` : ""
 
-    let audio = emptyChecker(data.audio) ? `<audio controls><source src="${data.audio}" type="audio/mp3"></audio>` : ""
+    let audio = emptyChecker(data.audio) ? `<audio controls controlslist="nodownload"><source src="${data.audio}" type="audio/mp3"></audio>` : ""
 
     return (
         `<div class="row message-body">

@@ -1,0 +1,35 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div id="conversation" class="col-sm-8">
+        <div class="row video-chat">
+            <div class="col-md-6 bg-dark border">
+                <video id="video-me"  width="250" height="250" src="">
+
+                </video>
+            </div>
+            <div class="col-md-6">
+                <video id="video-partner" width="250" height="250" src="" >
+
+                </video>
+            </div>
+        </div>
+        <div class="row video-buttons bg-dark text-center">
+            <button id="video-chat-microphone" class="btn btn-primary"><i class="fa fa-microphone"></i></button>
+            <button id="video-chat-camera" class="btn btn-primary"><i class="fa fa-camera"></i></button>
+            <a href="{% url 'chat:room' room.id %}" class="btn btn-danger"><i class="fa fa-phone"></i></a>
+        </div>
+    </div>
+{% endblock %}
+{% block js %}
+    {{ room.id|json_script:"room_id" }}
+    {{ request.user.username|json_script:"first_user" }}
+    {% if request.user == room.first_user %}
+        {{ room.second_user.username|json_script:"second_user" }}
+    {% else %}
+        {{ room.first_user.username|json_script:"second_user" }}
+    {% endif %}
+    <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+    <script src="{% static 'js/video_chat.js' %}"></script>
+{% endblock %}

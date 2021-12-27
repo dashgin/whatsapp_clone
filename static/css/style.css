@@ -8,6 +8,15 @@ body {
     box-sizing: border-box;
 }
 
+audio::-webkit-media-controls-enclosure {
+    background-color: transparent;
+    padding: 0 !important;
+}
+
+audio::-webkit-media-controls-volume-control-container {
+    display: none;
+}
+
 body {
     background-color: #33731e;
     background-size: cover;

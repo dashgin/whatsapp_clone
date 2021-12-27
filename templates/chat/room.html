@@ -17,8 +17,15 @@
                     {% endif %}</a>
                 <span class="heading-online">Online</span>
             </div>
-            <div class="col-sm-1 col-xs-1  heading-dot pull-right">
-                <i class="fa fa-ellipsis-v fa-2x  pull-right" aria-hidden="true"></i>
+            <div class=" heading-dot">
+                <div class="w-50">
+                    <a href="{% url "chat:video" room.id %}">
+                        <i class="fa fa-video fa-2x  pull-right " aria-hidden="true"></i>
+                    </a>
+                </div>
+                <div class="w-50">
+                    <i class="fa fa-phone-alt fa-2x  pull-right d-inline-block" aria-hidden="true"></i>
+                </div>
             </div>
         </div>
 
@@ -76,4 +83,8 @@
             </div>
         </div>
     </div>
+
+{% endblock %}
+{% block js %}
+    <script src="{% static 'js/main.js' %}"></script>
 {% endblock %}

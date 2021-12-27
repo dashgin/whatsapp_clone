@@ -40,7 +40,7 @@ class Message(models.Model):
 
     def get_audio_tag(self):
         if self.audio_content:
-            return f'<audio controls><source src="{self.audio_content}" type="audio/ogg"></audio>'
+            return f'<audio controls controlslist="nodownload"><source src="{self.audio_content}" type="audio/ogg"></audio>'
         else:
             pass
        

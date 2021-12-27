@@ -1,6 +1,7 @@
 import json
 
 from asgiref.sync import sync_to_async
+from channels.db import database_sync_to_async
 from channels.generic.websocket import AsyncWebsocketConsumer
 
 from chat.models import Message
@@ -45,12 +46,13 @@ class ChatConsumer(AsyncWebsocketConsumer):
             audio_content = None
         user = self.scope['user']
 
-        m = await sync_to_async(Message.objects.create)(
+        m = await self.save_messages_to_db(
             room_id=self.room_name,
             user=user,
             text_content=message,
+
             image_content=image_content,
-            audio_content=audio_content,
+            audio_content=audio_content
         )
 
         # Send message to room group
@@ -81,3 +83,13 @@ class ChatConsumer(AsyncWebsocketConsumer):
             'image': image,
             'audio': audio
         }))
+
+    @database_sync_to_async
+    def save_messages_to_db(self, room_id, user, text_content, image_content, audio_content):
+        return Message.objects.create(
+            room_id=room_id,
+            user=user,
+            text_content=text_content,
+            image_content=image_content,
+            audio_content=audio_content
+        )

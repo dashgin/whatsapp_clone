@@ -17,7 +17,7 @@ class Room(models.Model):
 
 
 class Message(models.Model):
-    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     room = models.ForeignKey(Room, related_name="messages", on_delete=models.CASCADE)
     text_content = models.CharField(max_length=255)
     # file_content = models.FileField(upload_to='files/', blank=True, null=True)

@@ -13,10 +13,11 @@ let side = window.location.search.substr(1).split('=')[1];
 const peer = new Peer(
     firstUser,
     {
-        host: 'localhost',
-        port: 9000,
-        path: '/myapp/',
-
+        debug: 3,
+        //     host: 'localhost',
+        //     port: 9000,
+        //     path: '/myapp/',
+        //
     }
 )
 
@@ -63,18 +64,6 @@ navigator.mediaDevices.getUserMedia({video: true, audio: true})
                 stream.getVideoTracks()[0].enabled = true;
                 camera.classList.remove('btn-danger');
                 isCamEnabled = true;
-            }
-        });
-
-        microphone.addEventListener('click', function () {
-            if (isMicEnabled) {
-                stream.getAudioTracks()[0].enabled = false;
-                isMicEnabled = false;
-                microphone.classList.add('btn-danger');
-            } else {
-                stream.getAudioTracks()[0].enabled = true;
-                microphone.classList.remove('btn-danger');
-                isMicEnabled = true;
             }
         });
 

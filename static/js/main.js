@@ -4,7 +4,13 @@ const messageInput = document.getElementById('chat-message-input');
 const messageSendButton = document.getElementById('chat-message-submit');
 const messageList = document.querySelector('#conversation');
 messageList.scrollTop = messageList.scrollHeight;
-const chatSocket = new ReconnectingWebSocket('ws://' + window.location.host + '/ws/chat/' + roomName + '/');
+
+const chatSocket = new ReconnectingWebSocket(
+    (window.location.protocol === 'https:' ? 'wss' : 'ws') +
+    '://' + window.location.host +
+    '/ws/chat/' +
+    roomName + '/'
+);
 
 messageInput.focus();
 

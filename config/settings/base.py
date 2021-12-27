@@ -26,7 +26,15 @@ INSTALLED_APPS = [
     "channels",
     # local apps
     "chat",
+    'accounts'
 ]
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
+}
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -62,7 +70,7 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [("127.0.0.1", 6379)],
+            "hosts": [('redis://localhost:6379',)],
         },
     },
 }
@@ -120,7 +128,7 @@ AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
-
+AUTH_USER_MODEL = "accounts.User"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 # ACCOUNT_SESSION_REMEMBER = True
@@ -135,4 +143,3 @@ LOGOUT_REDIRECT_URL = "/"
 # ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 86400
 # ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"
 # AUTH_USER_MODEL = "accounts.User"
-

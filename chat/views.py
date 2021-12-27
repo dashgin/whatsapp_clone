@@ -1,9 +1,11 @@
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.views import View
 
 from .models import Room
+
+User = get_user_model()
 
 
 class Index(View):
@@ -27,7 +29,7 @@ class RoomView(LoginRequiredMixin, View):
                 'messages': messages
             }
             return render(self.request, 'chat/room.html', context)
-        return redirect('index')
+        return redirect('chat:index')
 
 
 class StartChat(LoginRequiredMixin, View):
@@ -57,5 +59,4 @@ class VideoChat(LoginRequiredMixin, View):
                 'room': room
             }
             return render(self.request, 'chat/video_chat.html', context)
-        return redirect('index')
-
+        return redirect('chat:index')

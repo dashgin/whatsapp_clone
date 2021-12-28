@@ -1,10 +1,9 @@
 import json
 
-from asgiref.sync import sync_to_async
 from channels.db import database_sync_to_async
 from channels.generic.websocket import AsyncWebsocketConsumer
 
-from chat.models import Message
+from .models import Message
 
 
 class ChatConsumer(AsyncWebsocketConsumer):
@@ -13,7 +12,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         self.room_group_name = None
         self.room_name = None
 
-    async def connect(self):
+    async def connect(self,  *args, **kwargs):
         self.room_name = self.scope['url_route']['kwargs']['room_name']
         self.room_group_name = 'chat_%s' % self.room_name
 

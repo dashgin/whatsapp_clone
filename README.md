@@ -13,7 +13,7 @@ Used technologies:
 + audio and image files sending
 + Video chat
 
-### Deployeed version
+### Deployed version
 https://dj-whatsapp.herokuapp.com/
 > + username: test
 > + password: test123@

@@ -22,12 +22,16 @@ INSTALLED_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
-    # "accounts",
+    'crispy_forms',
+    'crispy_forms_foundation',
+
     "channels",
+
     # local apps
     "chat",
     'accounts'
 ]
+
 
 DATABASES = {
     "default": {
@@ -80,7 +84,7 @@ CHANNEL_LAYERS = {
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "auth.password_validation.UserAttributeSimilarityValidator",
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
         "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
@@ -120,6 +124,8 @@ JAZZMIN_SETTINGS = {
         "main.SubPlanFeature",
     ],
 }
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 # all auth settings
 
 SITE_ID = 1  # all-auth supports multiple sites

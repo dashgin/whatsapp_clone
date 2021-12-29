@@ -8,9 +8,17 @@ from .models import Room
 User = get_user_model()
 
 
-class Index(LoginRequiredMixin, View):
+class Index(View):
     def get(self, request):
-        users = User.objects.exclude(id=self.request.user.id)
+        q = self.request.GET.get('q', '')
+        if self.request.user.is_authenticated:
+            if q:
+                users = User.objects.exclude(id=self.request.user.id).filter(username__icontains=q)
+            else:
+                users = User.objects.exclude(id=self.request.user.id)
+        else:
+            users = []
+
         context = {
             'users': users
         }
@@ -21,9 +29,10 @@ class RoomView(LoginRequiredMixin, View):
 
     def get(self, request, room_name):
         room = Room.objects.filter(id=room_name).first()
-        if (self.request.user == room.first_user) or (self.request.user == room.second_user):
-            messages = room.messages.all()
 
+        if (self.request.user == room.first_user) or (
+                self.request.user == room.second_user):
+            messages = room.messages.all()
             context = {
                 'room': room,
                 'messages': messages

@@ -12,13 +12,6 @@ const chatSocket = new ReconnectingWebSocket(
     '/ws/chat/' +
     roomName + '/'
 );
-// const chatSocket = new WebSocket(
-//     'ws://'
-//     + window.location.host
-//     + '/ws/chat/'
-//     + roomName
-//     + '/'
-// );
 
 messageInput.focus();
 
@@ -32,9 +25,8 @@ function emptyChecker(data) {
 }
 
 function messageBox(data) {
-    let message_user = data.user
 
-    let message_user_class = message_user === user ? "sender" : "receiver"
+    let message_user_class = data.user === user ? "sender" : "receiver"
 
     let image = emptyChecker(data.image) ? `<img src="${data.image}" width="150" height="150">` : ""
 
@@ -42,7 +34,7 @@ function messageBox(data) {
 
     return (
         `<div class="row message-body">
-                    <div class="col-sm-12 message-main-sender">
+                    <div class="col-sm-12 message-main-${message_user_class}">
                         <div class="${message_user_class}">
                             <div class="media">
                               ${image || audio}
@@ -162,5 +154,3 @@ function startRecord() {
 function stopRecord() {
     mediaRecorder.stop()
 }
-
-

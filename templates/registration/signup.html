@@ -3,19 +3,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Signup</title>
     {% include 'layout/cdn.html' %}
 </head>
 <body>
 
 <div class="container">
     <div class="row">
-        <h1 class="text-center">Login</h1>
+        <h1 class="text-center">Signup</h1>
         <form method="post" class="col-6 mx-auto">
             {% csrf_token %}
             {{ form | crispy }}
 
-            <input class="btn btn-primary col-6" type="submit" value="Login">
+            <input class="btn btn-primary col-6" type="submit" value="Signup">
         </form>
     </div>
 </div>
